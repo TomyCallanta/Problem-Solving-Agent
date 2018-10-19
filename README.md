@@ -24,7 +24,12 @@ This agent may be used in factories or for any type of work that needs an automa
 - Release (Re): Crane Claw lets go of object
 
 ## Instructions
-1. Input the desired initial state.
+1. Run the following command in the directory `/code` to start the program.
+```
+$ python base.py
+```
+
+2. Input the desired initial state.
 
 The program asks for the following:
 
@@ -37,18 +42,20 @@ Input initial state:
 True True True True False
 ```
 
-2. Input the desired goal state.
+3. Input the desired goal state.
 
 Sample input:
 ```
 Input goal state:
 True False True False False
 ```
-3. Choose the search strategy to be used. Input `bfs` for Breadth-First Search or `iddfs` for Iterative Deepening Depth-First Search.
+
+4. Choose the search strategy to be used. Input `bfs` for Breadth-First Search or `iddfs` for Iterative Deepening Depth-First Search.
 
 Sample input:
 ```
 Strategy to be used (bfs or iddfs):
 bfs
 ```
-4. The output will be the series of actions and states the agent passes through to arrive at the goal state. The `PATH` section outputs the path from the initial state to the goal state in reverse order: the goal state at the top and the initial state at the bottom.
+
+5. The output will be the series of actions and states the agent passes through to arrive at the goal state. The `PATH` section outputs the path from the initial state to the goal state in reverse order: the goal state at the top and the initial state at the bottom.
