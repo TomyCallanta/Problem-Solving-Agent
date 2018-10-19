@@ -3,9 +3,9 @@
 ### by Tomy Callanta and Gab Barbudo
 
 ## Description
-The Claw is a problem solving agent which aims to transfer an object to a different location. It first checks whether there is an object under the claw and if there is, it transfers the object from the left side to the right side or vice versa.
+The Claw is a problem solving agent which has the aim to transfer an object to a different location. It first checks whether there is an object under the claw and if there is, it transfers the object from the left side to the right side or vice versa.
 
-This agent may be useful for factories or for any type of work that needs an automated machine that transfers objects from place to place.
+This agent may be used in factories or for any type of work that needs an automated machine that transfers objects from place to place.
 
 ## Agent and Environment Specifications
 - Environment has two (2) sides: left (L) and right (R)
@@ -29,10 +29,11 @@ This agent may be useful for factories or for any type of work that needs an aut
 The program asks for the following:
 
 ```
-<clawIsUp? craneIsLeft? clawIsOpen? objectIsLeft? objectHeld?>
+clawUp? craneIsLeft? clawOpen? objectIsLeft? objectHeld?
 ```
 Sample input:
 ```
+Input initial state:
 True True True True False
 ```
 
@@ -40,7 +41,14 @@ True True True True False
 
 Sample input:
 ```
+Input goal state:
 True False True False False
 ```
 3. Choose the search strategy to be used. Input `bfs` for Breadth-First Search or `iddfs` for Iterative Deepening Depth-First Search.
-4. The output will be the series of actions and states the agent passes through to arrive at the goal state. The `PATH` section outputs the path from the initial state to the goal state in reverse order.
+
+Sample input:
+```
+Strategy to be used (bfs or iddfs):
+bfs
+```
+4. The output will be the series of actions and states the agent passes through to arrive at the goal state. The `PATH` section outputs the path from the initial state to the goal state in reverse order: the goal state at the top and the initial state at the bottom.
