@@ -62,7 +62,7 @@ class Problem:
     def get_path(self, node):
         path = [node]
         curr = node.parent
-        print("--------------------")
+        print("---------------PATH---------------")
         print(node.action)
         print(node.state)
         while curr is not None:
