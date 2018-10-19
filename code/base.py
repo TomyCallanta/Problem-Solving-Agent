@@ -38,7 +38,7 @@ class Problem:
     #must input initial state, a successor function, and a goal
     def __init__(self, init_state, successor_fn, step_cost, goal):
         """
-        Problem contains methods and values to describe a problem that can be solve a general problem
+        Problem contains methods and values to describe a problem that can solve a general problem
 
         init_state = node describes initial state where search for the solution starts
         successor_fn = function to create new node states based on the specifications of the problem
