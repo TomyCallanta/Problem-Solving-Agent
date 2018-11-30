@@ -35,6 +35,23 @@ def do_successor(node):
 def step_cost_fn(state, action, result):
 	return 1
 
+def heuristic_A(node, goal):
+    """
+    node is an instance of ProblemState
+
+    this heuristic scores the node based on the number of features that are different from the given goal state
+    score of 0 would mean that the node is the same with the goal
+    """
+    score = 0
+    for i in range(len(goal)):
+        if goal[i] != node.state[i]:
+            score += 1
+    
+    return score
+
+def heuristic_B(node, goal):
+    return None
+
 class Problem:
     #must input initial state, a successor function, and a goal
     def __init__(self, init_state, successor_fn, step_cost, goal):
@@ -126,7 +143,7 @@ class Problem:
         		if not fringe: #checks if fringe is empty
         			return None #return null if no solution
 
-        		node = self.remove_front(fringe, search, heuristis is not None)
+        		node = self.remove_front(fringe, search, heuristic is not None)
         		depth = node.path_cost
         		print('Depth: ' + str(depth))
         		print(node.action)
@@ -139,7 +156,7 @@ class Problem:
 
         		for n in new_nodes:
                     if heuristic is not None:
-                        heappush( (heuristic(n), n) )
+                        heappush( (heuristic(n, self.goal), n) )
                     else:
                         fringe.append(n)
 
@@ -195,8 +212,18 @@ for i in goal_state.split(' '):
 	goal_array.append(i == 'True')
 goal_state = ProblemState(goal_array)
 
-print('Strategy to be used (bfs or iddfs): ')
-strategy = input()
-
 problem = Problem(init_state, do_successor, step_cost_fn, goal_state)
-problem.tree_solve(strategy)
+
+print('Do you want to use a heuristic? (Y or N):')
+answer = input()
+if answer == 'Y':
+    print('Which heuristic do you want to use? (A or B):')
+    answer = input()
+    if answer == 'A':
+        problem.tree_solve(heuristic_A)
+    elif answer == 'B':
+        problem.tree_solve(heuristic_B)
+else
+    print('Strategy to be used (bfs or iddfs): ')
+    strategy = input()
+    problem.tree_solve(strategy)
