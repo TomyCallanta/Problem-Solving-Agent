@@ -1,4 +1,5 @@
 from collections import deque
+from heapq import heappush, heappop
 
 def do_successor(node):
 	current_state = node.state
@@ -52,9 +53,11 @@ class Problem:
 
     def goal_test(self, node):
         return self.goal == node
-    
-    def remove_front(self, fringe, search):
-        if search == "bfs":
+
+    def remove_front(self, fringe, search, isUsingHeuristic):
+        if isUsingHeuristic:
+            return heappop(fringe)[1]
+        elif search == "bfs":
             return fringe.popleft()
         elif search == "iddfs":
             return fringe.pop()
@@ -73,15 +76,6 @@ class Problem:
 
         return path
 
-    def init_state(state):
-    	label_crane = "Crane: "
-    	label_object = "Object: "
-    	if state == 0:
-    		CLAW_DOWN = False
-    		CRANE_RIGHT = False
-    		CLAW_CLOSED = False
-    		OBJECT_RIGHT = False
-
     def expand(self, node):
         """
         returns a list of children nodes of node parameter
@@ -95,11 +89,11 @@ class Problem:
 
         return successors
 
-    def tree_solve(self, search="bfs"):
-        if search == "bfs":
+    def tree_solve(self, search="bfs", heuristic=None):
+        if heuristic is not None or search == "iddfs":
+            fringe = []; #fringe is a stack or priority queue
+        elif search == "bfs":
             fringe = deque([]) #fringe is a queue
-        elif search == "iddfs":
-            fringe = [] #fringe is a regular list but can be used as a stack
 
         fringe.append(self.init_state)
 
@@ -128,11 +122,11 @@ class Problem:
         		fringe = []
         		fringe.append(self.init_state)
 
-        	elif search == "bfs":
+        	elif heuristic is not None or search == "bfs":
         		if not fringe: #checks if fringe is empty
         			return None #return null if no solution
 
-        		node = self.remove_front(fringe, search)
+        		node = self.remove_front(fringe, search, heuristis is not None)
         		depth = node.path_cost
         		print('Depth: ' + str(depth))
         		print(node.action)
@@ -144,7 +138,10 @@ class Problem:
         		new_nodes = self.expand(node)
 
         		for n in new_nodes:
-        			fringe.append(n)
+                    if heuristic is not None:
+                        heappush( (heuristic(n), n) )
+                    else:
+                        fringe.append(n)
 
 class ProblemState:
     # def __new__(cls, state, prev_node = None, action=None, step_cost=0):
