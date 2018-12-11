@@ -1,0 +1,63 @@
+The Claw
+Input initial state: 
+Input goal state: 
+Do you want to use a heuristic? (Y or N):
+Which heuristic do you want to use? (A or B):
+Depth: 0
+None
+[True, True, True, True, False]
+Depth: 1
+Ri
+[True, False, True, True, False]
+Depth: 2
+D
+[False, False, True, True, False]
+Depth: 2
+H
+[True, False, False, True, False]
+Depth: 1
+D
+[False, True, True, True, False]
+Depth: 1
+H
+[True, True, False, True, False]
+Depth: 3
+H
+[False, False, False, True, False]
+Depth: 3
+D
+[False, False, False, True, False]
+Depth: 3
+L
+[True, True, False, True, False]
+Depth: 2
+D
+[False, True, False, True, False]
+Depth: 4
+D
+[False, True, False, True, False]
+Depth: 2
+H
+[False, True, False, True, True]
+Depth: 3
+U
+[True, True, False, True, True]
+Depth: 4
+Ri
+[True, False, False, False, True]
+Depth: 5
+Re
+[True, False, True, False, False]
+---------------PATH---------------
+Re
+[True, False, True, False, False]
+Ri
+[True, False, False, False, True]
+U
+[True, True, False, True, True]
+H
+[False, True, False, True, True]
+D
+[False, True, True, True, False]
+None
+[True, True, True, True, False]

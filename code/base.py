@@ -1,5 +1,6 @@
 from collections import deque
 from heapq import heappush, heappop
+import sys
 
 def do_successor(node):
     current_state = node.state
@@ -35,7 +36,7 @@ def do_successor(node):
 def step_cost_fn(state, action, result):
     return 1
 
-def heuristic_A(node, goal):
+def heuristic_A(node, goal, source):
     """
     node is an instance of ProblemState
 
@@ -43,14 +44,22 @@ def heuristic_A(node, goal):
     score of 0 would mean that the node is the same with the goal
     """
     score = 0
-    for i in range(len(goal.state)):
-        if goal.state[i] != node.state[i]:
-            score += 1
-    
+    if source == node:
+    	score = 1000
+    else:
+	    for i in range(len(goal.state)):
+	        if goal.state[i] != node.state[i]:
+	            score += 1
+	    
     return score
 
-def heuristic_B(node, goal):
-    return None
+def heuristic_B(node, goal,source):
+	val = 0
+	for i in range(len(node.state)):
+  		if node.state[i] == goal.state[i]:
+  			val+=1
+
+	return val
 
 class Problem:
     #must input initial state, a successor function, and a goal
@@ -114,11 +123,12 @@ class Problem:
 
         nth_node = 1
         if heuristic is not None:
-            heappush(fringe, (heuristic(self.init_state, self.goal), nth_node, self.init_state))
+            heappush(fringe, (heuristic(self.init_state, self.goal,None), nth_node, self.init_state))
             nth_node += 1
         else:
             fringe.append(self.init_state)
-
+        
+        visited = []
         counter = 0
         while True:
             counter = counter + 1
@@ -158,11 +168,13 @@ class Problem:
                     return self.get_path(node)
 
                 new_nodes = self.expand(node)
+                visited.append(node)
 
                 for n in new_nodes:
                     if heuristic is not None:
-                        heappush(fringe, (heuristic(n, self.goal), nth_node, n))
-                        nth_node += 1
+                    	if n not in visited:
+                        	heappush(fringe, (heuristic(n, self.goal,node), nth_node, n))
+                    	nth_node += 1
                     else:
                         fringe.append(n)
 
